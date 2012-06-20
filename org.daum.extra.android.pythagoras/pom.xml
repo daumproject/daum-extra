@@ -10,8 +10,8 @@
     </parent>
 
     <groupId>org.daum.extra.android</groupId>
-    <artifactId>org.daum.extra.android.osmdroid</artifactId>
-    <name>Daum :: Extra :: Android :: osmdroid</name>
+    <artifactId>org.daum.extra.android.pythagoras</artifactId>
+    <name>Daum :: Extra :: Android :: pythagoras</name>
 
     <properties>
         <android.tools.aapt>${android.home}/platform-tools/aapt</android.tools.aapt>
@@ -75,13 +75,6 @@
             <artifactId>httpmime</artifactId>
             <version>4.0.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.daum.common.gps.android</groupId>
-            <artifactId>org.daum.common.gps.android.root</artifactId>
-            <version>1.0</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.apache.james</groupId>
