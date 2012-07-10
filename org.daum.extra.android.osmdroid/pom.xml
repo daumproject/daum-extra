@@ -12,6 +12,7 @@
     <groupId>org.daum.extra.android</groupId>
     <artifactId>org.daum.extra.android.osmdroid</artifactId>
     <name>Daum :: Extra :: Android :: osmdroid</name>
+    <version>1.1</version>
 
     <properties>
         <android.tools.aapt>${android.home}/platform-tools/aapt</android.tools.aapt>
