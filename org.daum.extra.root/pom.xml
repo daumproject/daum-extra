@@ -37,6 +37,7 @@
         <module>../org.daum.extra.android.pythagoras</module>
         <module>../org.daum.extra.android.osmdroid</module>
        <module>../org.daum.extra.jdbm3</module>
+        <module>../org.daum.extra.javase.commonsio</module>
     </modules>
 
     <pluginRepositories>
