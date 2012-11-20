@@ -1,10 +1,7 @@
 // Created by plusminus on 21:46:41 - 25.09.2008
 package org.osmdroid.tileprovider.modules;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-
+import android.graphics.drawable.Drawable;
 import org.osmdroid.tileprovider.IRegisterReceiver;
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.MapTileProviderBase;
@@ -14,7 +11,9 @@ import org.osmdroid.tileprovider.util.StreamUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.drawable.Drawable;
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * A tile provider that can serve tiles from an archive using the supplied tile source. The tile

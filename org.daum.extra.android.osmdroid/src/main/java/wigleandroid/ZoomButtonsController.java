@@ -1,14 +1,13 @@
-package net.wigle.wigleandroid;
+package wigleandroid;
+
+import android.view.MotionEvent;
+import android.view.View;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import android.view.MotionEvent;
-import android.view.View;
 
 /**
  * android 1.5 compatible zoom controller, works like android.widget.ZoomButtonsController in 1.5 and up, 

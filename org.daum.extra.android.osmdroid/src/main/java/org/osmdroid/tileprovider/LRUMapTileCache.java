@@ -1,14 +1,13 @@
 package org.osmdroid.tileprovider;
 
-import java.util.LinkedHashMap;
-
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
+import java.util.LinkedHashMap;
 
 public class LRUMapTileCache extends LinkedHashMap<MapTile, Drawable>
 	implements OpenStreetMapTileProviderConstants {

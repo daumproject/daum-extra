@@ -1,13 +1,5 @@
 package org.osmdroid.views.overlay;
 
-import microsoft.mappoint.TileSystem;
-
-import org.osmdroid.tileprovider.MapTileProviderBase;
-import org.osmdroid.tileprovider.MapTileProviderBasic;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.MapView.Projection;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,6 +9,12 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.MotionEvent;
+import mappoint.TileSystem;
+import org.osmdroid.tileprovider.MapTileProviderBase;
+import org.osmdroid.tileprovider.MapTileProviderBasic;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.MapView.Projection;
 
 /**
  * Draws a mini-map as an overlay layer. It currently uses its own MapTileProviderBasic or a tile
@@ -52,7 +50,7 @@ public class MinimapOverlay extends TilesOverlay {
 	 * in is typically the same handler being used by the main map. The {@link MapTileProviderBase}
 	 * passed in cannot be the same tile provider used in the {@link TilesOverlay}, it must be a new
 	 * instance.
-	 * 
+	 *
 	 * @param pContext
 	 *            a context
 	 * @param tileRequestCompleteHandler
@@ -81,7 +79,7 @@ public class MinimapOverlay extends TilesOverlay {
 	 * in is typically the same handler being used by the main map. The {@link MapTileProviderBase}
 	 * passed in cannot be the same tile provider used in the {@link TilesOverlay}, it must be a new
 	 * instance.
-	 * 
+	 *
 	 * @param pContext
 	 *            a context
 	 * @param tileRequestCompleteHandler
@@ -176,7 +174,7 @@ public class MinimapOverlay extends TilesOverlay {
 				mMiniMapCanvasRect.right + 2, mMiniMapCanvasRect.bottom + 2, mPaint);
 
 		super.drawTiles(pC, projection.getZoomLevel() - miniMapZoomLevelDifference,
-				projection.getTileSizePixels(), mTileArea);
+				TileSystem.getTileSize(), mTileArea);
 	}
 
 	@Override

@@ -1,7 +1,8 @@
 // Created by plusminus on 21:37:08 - 27.09.2008
 package org.osmdroid.views;
 
-import microsoft.mappoint.TileSystem;
+import android.graphics.Point;
+import mappoint.TileSystem;
 
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
@@ -10,8 +11,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.util.MyMath;
 import org.osmdroid.views.util.constants.MapViewConstants;
 import org.osmdroid.views.util.constants.MathConstants;
-
-import android.graphics.Point;
 
 /**
  *
@@ -102,7 +101,7 @@ public class MapController implements IMapController, MapViewConstants {
 	}
 
 	/**
-	 * Animates the underlying {@link MapView} that it centers the passed {@link GeoPoint} in the
+	 * Animates the underlying {@link MapView} that it centers the passed {@link org.osmdroid.util.GeoPoint} in the
 	 * end. Uses: {@link MapController.ANIMATION_SMOOTHNESS_DEFAULT} and
 	 * {@link MapController.ANIMATION_DURATION_DEFAULT}.
 	 *
@@ -114,7 +113,7 @@ public class MapController implements IMapController, MapViewConstants {
 	}
 
 	/**
-	 * Animates the underlying {@link MapView} that it centers the passed {@link GeoPoint} in the
+	 * Animates the underlying {@link MapView} that it centers the passed {@link org.osmdroid.util.GeoPoint} in the
 	 * end.
 	 *
 	 * @param gp

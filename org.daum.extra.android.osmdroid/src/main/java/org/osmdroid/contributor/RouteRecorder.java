@@ -1,12 +1,11 @@
 // Created by plusminus on 12:28:16 - 21.09.2008
 package org.osmdroid.contributor;
 
-import java.util.ArrayList;
-
+import android.location.Location;
 import org.osmdroid.contributor.util.RecordedGeoPoint;
 import org.osmdroid.util.GeoPoint;
 
-import android.location.Location;
+import java.util.ArrayList;
 
 /**
  * 

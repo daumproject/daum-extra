@@ -1,9 +1,8 @@
 package org.osmdroid.events;
 
+import android.os.Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import android.os.Handler;
 
 /*
  * A MapListener that aggregates multiple events called in quick succession.

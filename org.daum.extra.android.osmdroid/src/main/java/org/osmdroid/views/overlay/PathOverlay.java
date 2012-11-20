@@ -1,19 +1,14 @@
 package org.osmdroid.views.overlay;
 
-import java.util.ArrayList;
-
+import android.content.Context;
+import android.graphics.*;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.Rect;
+import java.util.ArrayList;
 
 /**
  *

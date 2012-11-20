@@ -1,21 +1,15 @@
 // Created by plusminus on 20:50:06 - 03.10.2008
 package org.osmdroid.views.overlay;
 
-import java.util.List;
-
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.drawable.Drawable;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.OverlayItem.HotspotPlace;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
+import java.util.List;
 
 public class ItemizedOverlayWithFocus<Item extends OverlayItem> extends ItemizedIconOverlay<Item> {
 

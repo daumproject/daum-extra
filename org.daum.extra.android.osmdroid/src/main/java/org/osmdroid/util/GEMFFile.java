@@ -1,17 +1,7 @@
 package org.osmdroid.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
 /**
  * GEMF File handler class.
@@ -612,7 +602,7 @@ public class GEMFFile {
 
 			return new GEMFInputStream(mFileNames.get(index), dataOffset, dataLength);
 
-		} catch (final java.io.IOException e) {
+		} catch (final IOException e) {
 			return null;
 		}
 	}

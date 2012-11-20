@@ -1,7 +1,6 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.File;
-
+import android.graphics.drawable.Drawable;
 import org.osmdroid.tileprovider.ExpirableBitmapDrawable;
 import org.osmdroid.tileprovider.IRegisterReceiver;
 import org.osmdroid.tileprovider.MapTile;
@@ -12,7 +11,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.drawable.Drawable;
+import java.io.File;
 
 /**
  * Implements a file system cache and provides cached tiles. This functions as a tile provider by

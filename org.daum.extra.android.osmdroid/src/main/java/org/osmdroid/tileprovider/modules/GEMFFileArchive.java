@@ -1,13 +1,13 @@
 package org.osmdroid.tileprovider.modules;
 
+import org.osmdroid.tileprovider.MapTile;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.util.GEMFFile;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
-import org.osmdroid.tileprovider.MapTile;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.util.GEMFFile;
 
 public class GEMFFileArchive implements IArchiveFile {
 

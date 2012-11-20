@@ -1,10 +1,10 @@
 package org.osmdroid.tileprovider;
 
+import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
-
-import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
 
 public class MapTileRequestState {
 

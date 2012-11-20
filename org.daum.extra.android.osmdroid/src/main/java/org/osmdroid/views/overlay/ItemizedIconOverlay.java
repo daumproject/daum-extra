@@ -1,7 +1,9 @@
 package org.osmdroid.views.overlay;
 
-import java.util.List;
-
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.ResourceProxy.bitmap;
@@ -9,10 +11,7 @@ import org.osmdroid.api.IMapView;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 
-import android.content.Context;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
+import java.util.List;
 
 public class ItemizedIconOverlay<Item extends OverlayItem> extends ItemizedOverlay<Item> {
 

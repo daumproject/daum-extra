@@ -1,20 +1,14 @@
 // Created by plusminus on 22:01:11 - 29.09.2008
 package org.osmdroid.views.overlay;
 
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.Paint.Style;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
-
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.Point;
 
 /**
  *

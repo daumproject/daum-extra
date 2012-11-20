@@ -1,8 +1,7 @@
 package org.osmdroid.util;
 
-import org.osmdroid.util.constants.UtilConstants;
-
 import android.location.LocationManager;
+import org.osmdroid.util.constants.UtilConstants;
 
 /**
  *

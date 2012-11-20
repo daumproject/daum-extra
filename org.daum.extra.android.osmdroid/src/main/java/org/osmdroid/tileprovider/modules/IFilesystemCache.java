@@ -1,9 +1,9 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.InputStream;
-
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
+
+import java.io.InputStream;
 
 /**
  * Represents a write-only interface into a file system cache.
@@ -25,5 +25,5 @@ public interface IFilesystemCache {
 	 * @return
 	 */
 	boolean saveFile(final ITileSource pTileSourceInfo, MapTile pTile,
-			final InputStream pStream);
+                     final InputStream pStream);
 }

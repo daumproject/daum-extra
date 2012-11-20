@@ -7,22 +7,17 @@ package org.osmdroid.contributor;
  * Original JAVA-Code ported for Android compatibility by Nicolas 'plusminus' Gramlich.
  */
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import org.osmdroid.contributor.util.RecordedGeoPoint;
+import org.osmdroid.contributor.util.RecordedRouteGPXFormatter;
+import org.osmdroid.contributor.util.Util;
+import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
-import org.osmdroid.contributor.util.RecordedGeoPoint;
-import org.osmdroid.contributor.util.RecordedRouteGPXFormatter;
-import org.osmdroid.contributor.util.Util;
-import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
 
 /**
  * Small java class that allows to upload gpx files to www.openstreetmap.org via its api call.
@@ -74,7 +69,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	 * 
 	 * @param gpxInputStream
 	 *            the InputStream containing the gpx-data.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 */
 	public static void uploadAsync(final ArrayList<RecordedGeoPoint> recordedGeoPoints) {
 		uploadAsync(DEFAULT_DESCRIPTION, DEFAULT_TAGS, true, recordedGeoPoints);
@@ -84,7 +79,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	 * Uses OSMConstants.OSM_USERNAME and OSMConstants.OSM_PASSWORD as username/password. The
 	 * 'filename' will be the current <code>timestamp.gpx</code> (i.e. "20081231_234815_912.gpx")
 	 * NOTE: This method is not blocking!
-	 * 
+	 *
 	 * @param description
 	 *            <code>not null</code>
 	 * @param tags
@@ -93,7 +88,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	 *            adds Date Tags to the existing Tags (i.e. "October 2008")
 	 * @param gpxInputStreaman
 	 *            the InputStream containing the gpx-data.
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 */
 	public static void uploadAsync(final String description, final String tags,
 			final boolean addDateTags, final ArrayList<RecordedGeoPoint> recordedGeoPoints) {
@@ -104,7 +99,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 
 	/**
 	 * NOTE: This method is not blocking! (Code runs in thread)
-	 * 
+	 *
 	 * @param username
 	 *            <code>not null</code> and <code>not empty</code>. Valid OSM-username
 	 * @param password
@@ -120,7 +115,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	 *            the InputStream containing the gpx-data.
 	 * @param pseudoFileName
 	 *            ending with "<code>.gpx</code>"
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 */
 	public static void uploadAsync(final String username, final String password,
 			final String description, final String tags, final boolean addDateTags,
@@ -221,7 +216,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	 * @param out
 	 * @param string
 	 * @param gpxFile
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 */
 	private static void writeContentDispositionFile(final DataOutputStream out, final String name,
 			final InputStream gpxInputStream, final String pseudoFileName) throws IOException {
@@ -249,7 +244,7 @@ public class OSMUploader implements OpenStreetMapContributorConstants {
 	/**
 	 * @param string
 	 * @param urlDesc
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 */
 	private static void writeContentDisposition(final DataOutputStream out, final String name,
 			final String value) throws IOException {

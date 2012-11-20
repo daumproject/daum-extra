@@ -1,24 +1,18 @@
 // Created by plusminus on 21:46:22 - 25.09.2008
 package org.osmdroid.tileprovider;
 
-import java.util.HashMap;
-
-import microsoft.mappoint.TileSystem;
-
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import mappoint.TileSystem;
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.util.TileLooper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
+import java.util.HashMap;
 
 /**
  * This is an abstract class. The tile provider is responsible for:
@@ -33,7 +27,7 @@ import android.os.Handler;
  *
  */
 public abstract class MapTileProviderBase implements IMapTileProviderCallback,
-		OpenStreetMapTileProviderConstants {
+        OpenStreetMapTileProviderConstants {
 
 	private static final Logger logger = LoggerFactory.getLogger(MapTileProviderBase.class);
 
@@ -134,6 +128,33 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 
 		if (DEBUGMODE) {
 			logger.debug("MapTile request failed: " + tile);
+		}
+	}
+
+	/**
+	 * Called by implementation class methods indicating that they have produced an expired result
+	 * that can be used but better results may be delivered later. The tile is added to the cache,
+	 * and a MAPTILE_SUCCESS_ID message is sent.
+	 * 
+	 * @param pState
+	 *            the map tile request state object
+	 * @param pDrawable
+	 *            the Drawable of the map tile
+	 */
+	@Override
+	public void mapTileRequestExpiredTile(MapTileRequestState pState, Drawable pDrawable) {
+		final MapTile tile = pState.getMapTile();
+		if (pDrawable != null && !mTileCache.containsTile(tile)) {
+			mTileCache.putTile(tile, pDrawable);
+		}
+
+		// tell our caller we've finished and it should update its view
+		if (mTileRequestCompleteHandler != null) {
+			mTileRequestCompleteHandler.sendEmptyMessage(MapTile.MAPTILE_SUCCESS_ID);
+		}
+
+		if (DEBUGMODE) {
+			logger.debug("MapTile request complete: " + tile);
 		}
 	}
 
@@ -251,7 +272,9 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 				final Bitmap bitmap = mNewTiles.remove(tile);
 				final ExpirableBitmapDrawable drawable = new ExpirableBitmapDrawable(bitmap);
 				drawable.setState(new int[] { ExpirableBitmapDrawable.EXPIRED });
-				mTileCache.putTile(tile, drawable);
+				Drawable existingTile = mTileCache.getMapTile(tile);
+				if (existingTile == null || ExpirableBitmapDrawable.isDrawableExpired(existingTile))
+					mTileCache.putTile(tile, drawable);
 			}
 		}
 
@@ -275,7 +298,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 				final int yy = (pY % (1 << mDiff)) * mTileSize_2;
 				mSrcRect.set(xx, yy, xx + mTileSize_2, yy + mTileSize_2);
 				mDestRect.set(0, 0, pTileSizePx, pTileSizePx);
-				final Bitmap bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.ARGB_8888);
+				final Bitmap bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.RGB_565);
 				final Canvas canvas = new Canvas(bitmap);
 				canvas.drawBitmap(oldBitmap, mSrcRect, mDestRect, null);
 				if (DEBUGMODE) {
@@ -314,7 +337,7 @@ public abstract class MapTileProviderBase implements IMapTileProviderCallback,
 						final Bitmap oldBitmap = ((BitmapDrawable)oldDrawable).getBitmap();
 						if (oldBitmap != null) {
 							if (bitmap == null) {
-								bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.ARGB_8888);
+								bitmap = Bitmap.createBitmap(pTileSizePx, pTileSizePx, Bitmap.Config.RGB_565);
 								canvas = new Canvas(bitmap);
 								canvas.drawColor(Color.LTGRAY);
 							}

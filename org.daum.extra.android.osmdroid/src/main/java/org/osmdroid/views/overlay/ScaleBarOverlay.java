@@ -35,8 +35,10 @@ package org.osmdroid.views.overlay;
  *
  */
 
-import java.lang.reflect.Field;
-
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.Paint.Style;
+import android.view.WindowManager;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IGeoPoint;
@@ -45,14 +47,7 @@ import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.Picture;
-import android.graphics.Rect;
-import android.view.WindowManager;
+import java.lang.reflect.Field;
 
 public class ScaleBarOverlay extends Overlay implements GeoConstants {
 

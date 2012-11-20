@@ -12,7 +12,7 @@
     <groupId>org.daum.extra.android</groupId>
     <artifactId>org.daum.extra.android.osmdroid</artifactId>
     <name>Daum :: Extra :: Android :: osmdroid</name>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <properties>
         <android.tools.aapt>${android.home}/platform-tools/aapt</android.tools.aapt>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.0.1</version>
+            <version>4.2.1</version>
         </dependency>
 
         <dependency>

@@ -1,12 +1,12 @@
 // Created by plusminus on 13:23:45 - 21.09.2008
 package org.osmdroid.contributor.util;
 
+import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
-
-import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
 
 /**
  * Class capable of formatting a List of Points to the GPX 1.1 format.

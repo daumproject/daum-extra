@@ -1,17 +1,15 @@
 package org.osmdroid.views.util;
 
-import java.util.List;
-
-import microsoft.mappoint.TileSystem;
-
-import org.osmdroid.util.BoundingBoxE6;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView.Projection;
-
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import mappoint.TileSystem;
+import org.osmdroid.util.BoundingBoxE6;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView.Projection;
+
+import java.util.List;
 
 public class PathProjection {
 

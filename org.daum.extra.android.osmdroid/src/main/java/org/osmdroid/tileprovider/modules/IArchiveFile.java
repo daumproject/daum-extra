@@ -1,9 +1,9 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.InputStream;
-
 import org.osmdroid.tileprovider.MapTile;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
+
+import java.io.InputStream;
 
 public interface IArchiveFile {
 

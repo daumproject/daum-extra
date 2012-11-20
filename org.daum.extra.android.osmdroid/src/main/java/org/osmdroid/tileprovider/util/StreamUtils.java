@@ -1,13 +1,13 @@
 // Created by plusminus on 19:14:08 - 20.10.2008
 package org.osmdroid.tileprovider.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class StreamUtils {
 
@@ -55,7 +55,7 @@ public class StreamUtils {
 	 *            The output stream to copy to.
 	 * @return the total length copied
 	 * 
-	 * @throws IOException
+	 * @throws java.io.IOException
 	 *             If any error occurs during the copy.
 	 */
 	public static long copy(final InputStream in, final OutputStream out) throws IOException {

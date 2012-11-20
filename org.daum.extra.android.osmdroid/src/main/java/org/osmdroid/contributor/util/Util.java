@@ -1,13 +1,13 @@
 // Created by plusminus on 13:24:05 - 21.09.2008
 package org.osmdroid.contributor.util;
 
+import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
+import org.osmdroid.util.BoundingBoxE6;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.osmdroid.contributor.util.constants.OpenStreetMapContributorConstants;
-import org.osmdroid.util.BoundingBoxE6;
 
 /**
  * 

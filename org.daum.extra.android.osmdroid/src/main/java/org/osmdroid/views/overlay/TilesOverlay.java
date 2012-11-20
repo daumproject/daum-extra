@@ -1,7 +1,13 @@
 package org.osmdroid.views.overlay;
 
-import microsoft.mappoint.TileSystem;
-
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import mappoint.TileSystem;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.tileprovider.MapTile;
@@ -14,23 +20,10 @@ import org.osmdroid.views.MapView.Projection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
-
 /**
  * These objects are the principle consumer of map tiles.
  *
- * see {@link MapTile} for an overview of how tiles are acquired by this overlay.
+ * see {@link org.osmdroid.tileprovider.MapTile} for an overview of how tiles are acquired by this overlay.
  *
  */
 
@@ -305,7 +298,7 @@ public class TilesOverlay extends Overlay implements IOverlayMenuProvider {
 				final int tileSize = mTileProvider.getTileSource() != null ? mTileProvider
 						.getTileSource().getTileSizePixels() : 256;
 				final Bitmap bitmap = Bitmap.createBitmap(tileSize, tileSize,
-						Bitmap.Config.ARGB_8888);
+						Bitmap.Config.RGB_565);
 				final Canvas canvas = new Canvas(bitmap);
 				final Paint paint = new Paint();
 				canvas.drawColor(mLoadingBackgroundColor);

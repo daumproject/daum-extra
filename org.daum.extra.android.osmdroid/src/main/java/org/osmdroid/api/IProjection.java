@@ -1,12 +1,10 @@
 package org.osmdroid.api;
 
-import org.osmdroid.views.MapView.Projection;
-
 import android.graphics.Point;
 
 /**
  * An interface that resembles the Google Maps API Projection interface and is implemented by the
- * osmdroid {@link Projection} class.
+ * osmdroid {@link org.osmdroid.views.MapView.Projection} class.
  *
  * @author Neil Boyd
  *

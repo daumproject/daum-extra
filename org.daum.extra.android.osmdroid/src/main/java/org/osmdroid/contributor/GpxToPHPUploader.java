@@ -1,12 +1,5 @@
 package org.osmdroid.contributor;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.ArrayList;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -19,6 +12,9 @@ import org.osmdroid.contributor.util.RecordedRouteGPXFormatter;
 import org.osmdroid.contributor.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.util.ArrayList;
 
 public class GpxToPHPUploader {
 

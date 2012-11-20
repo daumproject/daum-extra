@@ -1,17 +1,16 @@
 // Created by plusminus on 23:18:23 - 02.10.2008
 package org.osmdroid.views.overlay;
 
-import java.util.ArrayList;
-
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.MapView.Projection;
 import org.osmdroid.views.overlay.OverlayItem.HotspotPlace;
 
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import java.util.ArrayList;
 
 /**
  * Draws a list of {@link OverlayItem} as markers to a map. The item with the lowest index is drawn

@@ -1,12 +1,11 @@
 package org.osmdroid.tileprovider.modules;
 
-import java.io.File;
-import java.io.IOException;
-
+import android.database.sqlite.SQLiteException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.database.sqlite.SQLiteException;
+import java.io.File;
+import java.io.IOException;
 
 public class ArchiveFileFactory {
 

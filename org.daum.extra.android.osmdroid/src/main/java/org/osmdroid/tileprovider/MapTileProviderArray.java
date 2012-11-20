@@ -1,16 +1,15 @@
 package org.osmdroid.tileprovider;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-
+import android.graphics.drawable.Drawable;
 import org.osmdroid.tileprovider.modules.MapTileModuleProviderBase;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import android.graphics.drawable.Drawable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * This top-level tile provider allows a consumer to provide an array of modular asynchronous tile
@@ -30,7 +29,7 @@ import android.graphics.drawable.Drawable;
  */
 public class MapTileProviderArray extends MapTileProviderBase {
 
-	private final ConcurrentHashMap<MapTileRequestState, MapTile> mWorking;
+	protected final ConcurrentHashMap<MapTileRequestState, MapTile> mWorking;
 
 	private static final Logger logger = LoggerFactory.getLogger(MapTileProviderArray.class);
 
@@ -53,7 +52,7 @@ public class MapTileProviderArray extends MapTileProviderBase {
 	 * @param aRegisterReceiver
 	 *            a {@link IRegisterReceiver}
 	 * @param tileProviderArray
-	 *            an array of {@link MapTileModuleProviderBase}
+	 *            an array of {@link org.osmdroid.tileprovider.modules.MapTileModuleProviderBase}
 	 */
 	public MapTileProviderArray(final ITileSource pTileSource,
 			final IRegisterReceiver aRegisterReceiver,
@@ -72,6 +71,10 @@ public class MapTileProviderArray extends MapTileProviderBase {
 			for (final MapTileModuleProviderBase tileProvider : mTileProviderList) {
 				tileProvider.detach();
 			}
+		}
+
+		synchronized (mWorking) {
+			mWorking.clear();
 		}
 	}
 
@@ -144,19 +147,43 @@ public class MapTileProviderArray extends MapTileProviderBase {
 		}
 	}
 
+	@Override
+	public void mapTileRequestExpiredTile(MapTileRequestState aState, Drawable aDrawable) {
+		final MapTileModuleProviderBase nextProvider = findNextAppropriateProvider(aState);
+		if (nextProvider != null) {
+			nextProvider.loadMapTileAsync(aState);
+		} else {
+			synchronized (mWorking) {
+				mWorking.remove(aState);
+			}
+		}
+		super.mapTileRequestExpiredTile(aState, aDrawable);
+	}
+
 	/**
 	 * We want to not use a provider that doesn't exist anymore in the chain, and we want to not use
 	 * a provider that requires a data connection when one is not available.
 	 */
 	protected MapTileModuleProviderBase findNextAppropriateProvider(final MapTileRequestState aState) {
 		MapTileModuleProviderBase provider = null;
+		boolean providerDoesntExist = false, providerCantGetDataConnection = false, providerCantServiceZoomlevel = false;
 		// The logic of the while statement is
-		// "Keep looping until you get null, or a provider that still exists and has a data connection if it needs one,"
+		// "Keep looping until you get null, or a provider that still exists
+		// and has a data connection if it needs one and can service the zoom level,"
 		do {
 			provider = aState.getNextProvider();
+			// Perform some checks to see if we can use this provider
+			// If any of these are true, then that disqualifies the provider for this tile request.
+			if (provider != null) {
+				providerDoesntExist = !this.getProviderExists(provider);
+				providerCantGetDataConnection = !useDataConnection()
+						&& provider.getUsesDataConnection();
+				int zoomLevel = aState.getMapTile().getZoomLevel();
+				providerCantServiceZoomlevel = zoomLevel > provider.getMaximumZoomLevel()
+						|| zoomLevel < provider.getMinimumZoomLevel();
+			}
 		} while ((provider != null)
-				&& (!getProviderExists(provider) || (!useDataConnection() && provider
-						.getUsesDataConnection())));
+				&& (providerDoesntExist || providerCantGetDataConnection || providerCantServiceZoomlevel));
 		return provider;
 	}
 

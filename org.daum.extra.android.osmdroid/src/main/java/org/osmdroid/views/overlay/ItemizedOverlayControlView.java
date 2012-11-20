@@ -1,14 +1,13 @@
 // Created by plusminus on 22:59:38 - 12.09.2008
 package org.osmdroid.views.overlay;
 
-import org.osmdroid.DefaultResourceProxyImpl;
-import org.osmdroid.ResourceProxy;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 
 public class ItemizedOverlayControlView extends LinearLayout {
 

@@ -1,10 +1,9 @@
 // Created by plusminus on 00:02:58 - 03.10.2008
 package org.osmdroid.views.overlay;
 
-import org.osmdroid.util.GeoPoint;
-
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import org.osmdroid.util.GeoPoint;
 
 /**
  * Immutable class describing a GeoPoint with a Title and a Description.

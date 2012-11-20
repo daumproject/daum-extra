@@ -1,14 +1,19 @@
 // Created by plusminus on 17:45:56 - 25.09.2008
 package org.osmdroid.views;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import microsoft.mappoint.TileSystem;
-import net.wigle.wigleandroid.ZoomButtonsController;
-import net.wigle.wigleandroid.ZoomButtonsController.OnZoomListener;
-
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Handler;
+import android.util.AttributeSet;
+import android.view.*;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.Scroller;
+import mappoint.TileSystem;
 import org.metalev.multitouch.controller.MultiTouchController;
 import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCanvas;
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
@@ -36,26 +41,14 @@ import org.osmdroid.views.overlay.TilesOverlay;
 import org.osmdroid.views.util.constants.MapViewConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import wigleandroid.ZoomButtonsController;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.os.Handler;
-import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.widget.Scroller;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapView extends ViewGroup implements IMapView, MapViewConstants,
-		MultiTouchObjectCanvas<Object> {
+        MultiTouchObjectCanvas<Object> {
 
 	// ===========================================================
 	// Constants
@@ -193,7 +186,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 	}
 
 	/**
-	 * You can add/remove/reorder your Overlays using the List of {@link Overlay}. The first (index
+	 * You can add/remove/reorder your Overlays using the List of {@link org.osmdroid.views.overlay.Overlay}. The first (index
 	 * 0) Overlay gets drawn first, the one with the highest as the last one.
 	 */
 	public List<Overlay> getOverlays() {
@@ -278,7 +271,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 	void setMapCenter(final int aLatitudeE6, final int aLongitudeE6) {
 		final Point coords = TileSystem.LatLongToPixelXY(aLatitudeE6 / 1E6, aLongitudeE6 / 1E6,
 				getZoomLevel(), null);
-		final int worldSize_2 = TileSystem.MapSize(mZoomLevel) / 2;
+		final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false)) / 2;
 		if (getAnimation() == null || getAnimation().hasEnded()) {
 			logger.debug("StartScroll");
 			mScroller.startScroll(getScrollX(), getScrollY(),
@@ -306,6 +299,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
 		final int newZoomLevel = Math.max(minZoomLevel, Math.min(maxZoomLevel, aZoomLevel));
 		final int curZoomLevel = this.mZoomLevel;
+
+		if (newZoomLevel != curZoomLevel) {
+		    mScroller.forceFinished(true);
+		}
 
 		this.mZoomLevel = newZoomLevel;
 		this.checkZoomButtons();
@@ -559,7 +556,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 	/**
 	 * Returns a set of layout parameters with a width of
 	 * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT}, a height of
-	 * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} at the {@link GeoPoint} (0, 0) align
+	 * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT} at the {@link org.osmdroid.util.GeoPoint} (0, 0) align
 	 * with {@link MapView.LayoutParams#BOTTOM_CENTER}.
 	 */
 	@Override
@@ -779,7 +776,12 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 			return true;
 		}
 
-		final boolean r = super.dispatchTouchEvent(event);
+		if (super.dispatchTouchEvent(event)) {
+			if (DEBUGMODE) {
+				logger.debug("super handled onTouchEvent");
+			}
+			return true;
+		}
 
 		if (mGestureDetector.onTouchEvent(event)) {
 			if (DEBUGMODE) {
@@ -788,16 +790,10 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 			return true;
 		}
 
-		if (r) {
-			if (DEBUGMODE) {
-				logger.debug("super handled onTouchEvent");
-			}
-		} else {
-			if (DEBUGMODE) {
-				logger.debug("no-one handled onTouchEvent");
-			}
+		if (DEBUGMODE) {
+			logger.debug("no-one handled onTouchEvent");
 		}
-		return r;
+		return false;
 	}
 
 	@Override
@@ -816,7 +812,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 
 	@Override
 	public void scrollTo(int x, int y) {
-		final int worldSize_2 = TileSystem.MapSize(mZoomLevel) / 2;
+		final int worldSize_2 = TileSystem.MapSize(this.getZoomLevel(false)) / 2;
 		while (x < -worldSize_2) {
 			x += worldSize_2 * 2;
 		}
@@ -1286,7 +1282,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 				return true;
 			}
 
-			final int worldSize = TileSystem.MapSize(mZoomLevel);
+			final int worldSize = TileSystem.MapSize(MapView.this.getZoomLevel(false));
 			mScroller.fling(getScrollX(), getScrollY(), (int) -velocityX, (int) -velocityY,
 					-worldSize, worldSize, -worldSize, worldSize);
 			return true;
@@ -1358,7 +1354,7 @@ public class MapView extends ViewGroup implements IMapView, MapViewConstants,
 		}
 	}
 
-	private class MapViewZoomListener implements OnZoomListener {
+	private class MapViewZoomListener implements ZoomButtonsController.OnZoomListener {
 		@Override
 		public void onZoom(final boolean zoomIn) {
 			if (zoomIn) {

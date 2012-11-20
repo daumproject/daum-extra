@@ -1,12 +1,10 @@
 package org.osmdroid.util;
 
-import microsoft.mappoint.TileSystem;
-
-import org.osmdroid.tileprovider.MapTile;
-
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import mappoint.TileSystem;
+import org.osmdroid.tileprovider.MapTile;
 
 /**
  * A class that will loop around all the map tiles in the given viewport.
