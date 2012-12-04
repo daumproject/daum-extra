@@ -38,6 +38,7 @@
         <module>../org.daum.extra.android.osmdroid</module>
        <module>../org.daum.extra.jdbm3</module>
         <module>../org.daum.extra.javase.commonsio</module>
+        <module>../org.daum.extra.android.touchdbektorp</module>
     </modules>
 
     <pluginRepositories>
@@ -56,6 +57,13 @@
         <pluginRepository>
             <id>plugin.daum-snapshots</id>
             <url>http://maven.kevoree.org/daum/snapshots</url>
+        </pluginRepository>
+        <pluginRepository>
+
+                <id>sonatype-nexus-staging</id>
+                <name>Nexus Release Repository</name>
+                <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+
         </pluginRepository>
     </pluginRepositories>
 
