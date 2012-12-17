@@ -17,23 +17,7 @@ import java.util.Date;
  */
 public class Tester {
 
-    public static void  main (String argv[]) throws MalformedURLException {
-        /*
-        HttpClient httpClient = new StdHttpClient.Builder()
-                .url("http://192.168.1.113:8888")
-                .build();
-
-
-        CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
-        CouchDbConnector db = new StdCouchDbConnector("mydatabase", dbInstance);
-
-        db.createDatabaseIfNotExists();
-
-
-
-
-      db.create(t);
-                       */
+    public static void  main (String argv[]) throws MalformedURLException, InterruptedException {
 
 
         long duree,start;
@@ -44,33 +28,38 @@ public class Tester {
         t.prenom = "jean-emile";
         t.nom = "DARTOIS";
 
-        /*      */
-        CouchDbClient dbClient = new CouchDbClient("erwan",true,"http","192.168.1.113",8888,"","");
-
-        CouchDbClient dbClient2 = new CouchDbClient("erwan",true,"http","192.168.1.121",8888,"","");
 
 
 
 
-        int nb = 10;
+                CouchDbClient android = new CouchDbClient("jed2",true,"http","192.168.1.121",8888,"","");
+
+        CouchDbClient java = new CouchDbClient("jed2",true,"http","192.168.1.107",8888,"","");
+
+
+
+        Victime t2 =  null;
+
+
+        int nb = 1;
         int counter = 0;
 
         start= System.currentTimeMillis();
         for(int i=0;i<nb;i++){
 
             t.prenom = "jean-emile "+i;
-
-            Response c= dbClient.save(t);
-
-            Victime t2 =  null;
+            System.out.println("save "+android.getDBUri());
+            Response c =        java.save(t);
 
             do {
                 try
                 {
-                    t2 = dbClient2.find(Victime.class, c.getId());
+                    System.out.println("looking in "+java.getDBUri());
+                    t2 = android.find(Victime.class,c.getId());
+
                 }catch (Exception e){
                     //ignore
-
+                    Thread.sleep(1000);
                 }
             }  while (t2 == null) ;
 
@@ -80,6 +69,24 @@ public class Tester {
                 System.out.println("OK "+t2.get_id());
             }
 
+            System.out.println("remove in "+android.getDBUri());
+             /*
+            java.remove(t2);
+
+            do {
+                try
+                {
+                    t2 = null;
+                    System.out.println("wait delete "+t2.get_id());
+                    t2 = android.find(Victime.class,t2.get_id());
+
+                }catch (Exception e){
+                    //ignore
+                    Thread.sleep(1000);
+                }
+            }  while (t2 != null) ;
+
+           */
         }
 
         System.out.println(counter);
